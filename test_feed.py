@@ -3,11 +3,29 @@ import sys
 import cv2
 import numpy as np
 import random
-from threading import Thread
+import time
+from threading import Thread, Lock
 
 from pykeyboard import PyKeyboard
 from characters import *
 from Player import Key, Player, RectArea
+
+
+class myKeyboard(PyKeyboard):
+	def __init__(self):
+		super(myKeyboard, self).__init__()
+		self.mutex = Lock()
+	
+	def release_key(self, k):
+		self.mutex.acquire()
+		super(myKeyboard, self).release_key(k)
+		self.mutex.release()
+	
+	def press_key(self, k):
+		self.mutex.acquire()
+		super(myKeyboard, self).press_key(k)
+		self.mutex.release()
+	
 
 
 
@@ -20,15 +38,22 @@ class KeyOutput:
 				if 'combo' not in k.key:
 					self.keys[k.key] = False
 		self.combos = dict([(id(p), None) for p in players])
-		self.kb = PyKeyboard()
-		print self.keys
+		self.kb = myKeyboard()
+
+
+	def reset(self, hard=False):
+		for k in self.keys :
+			self.kb.release_key(k)
+			self.keys[k] = False
+		if hard: # hard reset, build new keyboard object
+			print "hard reset"
+			del self.kb
+			self.kb = myKeyboard()
 	
+
 	def update(self, newkeys, send=True):
 		if send == False :
-			#reset keys
-			for k in self.keys :
-				self.kb.release_key(k)
-				self.keys[k] = False
+			self.reset()
 		else :
 			for k in self.keys :
 				# key is present and wasn't pressed before
@@ -39,7 +64,7 @@ class KeyOutput:
 						if (self.combos[pid] is not None) and (self.combos[pid].isAlive()) and (k in p.listKey) :
 							valid = False
 					if valid :
-						print "pressing", k
+						#print "pressing", k
 						self.kb.press_key(k)
 						self.keys[k] = True
 				# key was pressed before but is no longer present
@@ -50,20 +75,20 @@ class KeyOutput:
 						if (self.combos[pid] is not None) and (self.combos[pid].isAlive()) and (k in p.listKey) :
 							valid = False
 					if valid :
-						print "releasing", k
+						#print "releasing", k
 						self.kb.release_key(k)
 						self.keys[k] = False
-			
+
 			for pid, p in self.players.iteritems():
 				if str(pid)+'_combo' in newkeys and p.SFchar != None:
 					# check if player is curently not performing a combo
 					if (self.combos[pid] is None) or (not self.combos[pid].isAlive()):
-						# cancel all keys for that player:
+						# cancel all keys for that player
 						p.cancelKeys(self.kb, self.keys)
 						# launch combos
 						combo = random.choice(p.SFchar.combos.keys())
-						print "combo", combo, "from", p.SFchar.name
-						self.combos[pid] = Thread(target=p.SFchar.combos[combo], args=(self.kb, p.lut))
+						print "combo", combo, "from", p.SFchar.name,
+						self.combos[pid] = Thread(target=p.SFchar.combo, args=(p.SFchar.combos[combo], self.kb, p.lut, self))
 						self.combos[pid].start()
 					
 				
@@ -236,7 +261,11 @@ class MainWindow(QtGui.QMainWindow):
 			self.but1.setText("Turn On")
 			self.state = False
 		else :
+			self.but1.setEnabled(False)
+			# add delay to let the use click on the window
+			time.sleep(3)
 			self.but1.setText("Turn Off")
+			self.but1.setEnabled(True)
 			self.state = True
 
 

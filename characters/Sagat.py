@@ -1,6 +1,6 @@
 import time
 
-class Sagat:
+class Sagat():
 	def __init__(self):
 		self.name = "Sagat"
 		self.combos = {
@@ -11,6 +11,14 @@ class Sagat:
 					   "tiger_cannon":self.tiger_cannon,
 					   "tiger_raid":self.tiger_raid,
 					   }
+		
+	def combo(self, func, kb, lut, controler):
+		try :
+			func(kb, lut)
+			print "Done", self.name
+		except Exception as e:
+			print e
+			controler.reset(hard=True)
 	
 	def tiger_shot(self, kb, lut):
 		r = lut['r']
@@ -19,7 +27,7 @@ class Sagat:
 		lp = lut['lp']
 		#--------------------
 		time.sleep(0.3)
-		print ">> tiger shot !"
+		#print ">> tiger shot !"
 		kb.press_key(d)
 		time.sleep(0.05)
 		kb.press_key(r)
@@ -32,7 +40,7 @@ class Sagat:
 		kb.release_key(r)
 
 		time.sleep(0.3)
-		print "<< tiger shot !"
+		#print "<< tiger shot !"
 		kb.press_key(d)
 		time.sleep(0.05)
 		kb.press_key(l)
@@ -52,7 +60,7 @@ class Sagat:
 		lk = lut['lk']
 		#--------------------
 		time.sleep(0.3)
-		print ">> ground tiger shot !"
+		#print ">> ground tiger shot !"
 		kb.press_key(d)
 		time.sleep(0.05)
 		kb.press_key(r)
@@ -65,7 +73,7 @@ class Sagat:
 		kb.release_key(r)
 
 		time.sleep(0.3)
-		print "<< ground tiger shot !"
+		#print "<< ground tiger shot !"
 		kb.press_key(d)
 		time.sleep(0.05)
 		kb.press_key(l)
@@ -85,7 +93,7 @@ class Sagat:
 		lp = lut['lp']
 		#-----------------------
 		time.sleep(0.3)
-		print ">> tiger_blow !"
+		#print ">> tiger_blow !"
 		kb.press_key(r)
 		time.sleep(0.05)
 		kb.release_key(r)
@@ -101,7 +109,7 @@ class Sagat:
 		kb.release_key(r)
 	
 		time.sleep(0.3)
-		print "<< tiger_blow !"
+		#print "<< tiger_blow !"
 		kb.press_key(l)
 		time.sleep(0.05)
 		kb.release_key(l)
@@ -123,7 +131,7 @@ class Sagat:
 		lk = lut['lk']
 		#-----------------------
 		time.sleep(0.3)
-		print ">> tiger_crush !"
+		#print ">> tiger_crush !"
 		kb.press_key(r)
 		time.sleep(0.05)
 		kb.release_key(r)
@@ -139,7 +147,7 @@ class Sagat:
 		kb.release_key(r)
 	
 		time.sleep(0.3)
-		print "<< tiger_crush !"
+		#print "<< tiger_crush !"
 		kb.press_key(l)
 		time.sleep(0.05)
 		kb.release_key(l)
@@ -163,7 +171,7 @@ class Sagat:
 		lp = lut['lp']
 		#--------------
 		time.sleep(0.3)
-		print ">> tiger_cannon !"
+		#print ">> tiger_cannon !"
 		kb.press_key(d)
 		time.sleep(0.05)
 		kb.press_key(r)
@@ -185,7 +193,7 @@ class Sagat:
 		kb.release_key(r)
 	
 		time.sleep(0.3)
-		print "<< tiger_cannon !"
+		#print "<< tiger_cannon !"
 		kb.press_key(d)
 		time.sleep(0.05)
 		kb.press_key(l)
@@ -214,7 +222,7 @@ class Sagat:
 		lk = lut['lk']
 		#--------------
 		time.sleep(0.3)
-		print ">> tiger_raid / genocide !"
+		#print ">> tiger_raid / genocide !"
 		kb.press_key(d)
 		time.sleep(0.05)
 		kb.press_key(r)
@@ -236,7 +244,7 @@ class Sagat:
 		kb.release_key(r)
 	
 		time.sleep(0.3)
-		print "<< tiger_raid /genocide !"
+		#print "<< tiger_raid /genocide !"
 		kb.press_key(d)
 		time.sleep(0.05)
 		kb.press_key(l)

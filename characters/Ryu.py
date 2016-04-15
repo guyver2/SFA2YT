@@ -1,6 +1,6 @@
 import time
 
-class Ryu:
+class Ryu():
 	def __init__(self):
 		self.name = "Ryu"
 		self.combos = {
@@ -11,8 +11,14 @@ class Ryu:
 					   "shinkuu hadouken":self.shinkuu_hadouken,
 					   "shinkuu tatsumaki senpuukyaku":self.shinkuu_tatsumaki_senpuukyaku,
 					   }
-
 	
+	def combo(self, func, kb, lut, controler):
+		try :
+			func(kb, lut)
+			print "Done", self.name
+		except Exception as e:
+			print e
+			controler.reset(hard=True)
 	
 	def shinkuu_hadouken(self, kb, lut):
 		r = lut['r']
@@ -21,7 +27,7 @@ class Ryu:
 		lp = lut['lp']
 		#--------------
 		time.sleep(0.3)
-		print ">> Shinkuu hadouken !"
+		#print ">> Shinkuu hadouken !"
 		kb.press_key(d)
 		time.sleep(0.05)
 		kb.press_key(r)
@@ -43,7 +49,7 @@ class Ryu:
 		kb.release_key(r)
 	
 		time.sleep(0.3)
-		print "<< Shinkuu hadouken !"
+		#print "<< Shinkuu hadouken !"
 		kb.press_key(d)
 		time.sleep(0.05)
 		kb.press_key(l)
@@ -73,7 +79,7 @@ class Ryu:
 		lk = lut['lk']
 		
 		time.sleep(0.3)
-		print ">> Shinkuu Tatsumaki Senpuukyaku !"
+		#print ">> Shinkuu Tatsumaki Senpuukyaku !"
 		kb.press_key(d)
 		time.sleep(0.05)
 		kb.press_key(l)
@@ -95,7 +101,7 @@ class Ryu:
 		kb.release_key(l)
 
 		time.sleep(0.3)
-		print "<< Shinkuu Tatsumaki Senpuukyaku !"
+		#print "<< Shinkuu Tatsumaki Senpuukyaku !"
 		kb.press_key(d)
 		time.sleep(0.05)
 		kb.press_key(r)
@@ -124,7 +130,7 @@ class Ryu:
 		mp = lut['mp']
 		
 		time.sleep(0.3)
-		print ">> sakotsu wari"
+		#print ">> sakotsu wari"
 		kb.press_key(r)
 		time.sleep(0.05)
 		kb.press_key(mp)
@@ -133,7 +139,7 @@ class Ryu:
 		kb.release_key(mp)
 
 		time.sleep(0.3)
-		print ">> sakotsu wari"
+		#print ">> sakotsu wari"
 		kb.press_key(l)
 		time.sleep(0.05)
 		kb.press_key(mp)
@@ -148,7 +154,7 @@ class Ryu:
 		mk = lut['mk']
 		
 		time.sleep(0.3)
-		print ">> senpuu kyaku"
+		#print ">> senpuu kyaku"
 		kb.press_key(r)
 		time.sleep(0.05)
 		kb.press_key(mk)
@@ -157,7 +163,7 @@ class Ryu:
 		kb.release_key(mk)
 	
 		time.sleep(0.4)
-		print "<< senpuu kyaku"
+		#print "<< senpuu kyaku"
 		kb.press_key(l)
 		time.sleep(0.05)
 		kb.press_key(mk)
@@ -173,7 +179,7 @@ class Ryu:
 		lp = lut['lp']
 		#--------------------
 		time.sleep(0.3)
-		print ">> hadouken !"
+		#print ">> hadouken !"
 		kb.press_key(d)
 		time.sleep(0.05)
 		kb.press_key(r)
@@ -186,7 +192,7 @@ class Ryu:
 		kb.release_key(r)
 
 		time.sleep(0.3)
-		print "<< hadouken !"
+		#print "<< hadouken !"
 		kb.press_key(d)
 		time.sleep(0.05)
 		kb.press_key(l)
@@ -205,7 +211,7 @@ class Ryu:
 		lp = lut['lp']
 		#-----------------------
 		time.sleep(0.3)
-		print ">> shoryuken !"
+		#print ">> shoryuken !"
 		kb.press_key(r)
 		time.sleep(0.05)
 		kb.release_key(r)
@@ -221,7 +227,7 @@ class Ryu:
 		kb.release_key(r)
 	
 		time.sleep(0.3)
-		print "<< shoryuken !"
+		#print "<< shoryuken !"
 		kb.press_key(l)
 		time.sleep(0.05)
 		kb.release_key(l)
