@@ -39,9 +39,15 @@ Ryu Vs Sagat Round 1
 [![Round 1](https://img.youtube.com/vi/G3_bott9pNY/0.jpg)](https://www.youtube.com/watch?v=G3_bott9pNY)
 
 
-RyuVs Sagat Round 2
+Ryu Vs Sagat Round 2
 
 [![Round 2](https://img.youtube.com/vi/eXTodnQl9dk/0.jpg)](https://www.youtube.com/watch?v=eXTodnQl9dk)
+
+
+Ryu Vs Sagat full combat (another one)
+
+[![Full Match](https://img.youtube.com/vi/uInQZGqBmwk/0.jpg)](https://www.youtube.com/watch?v=uInQZGqBmwk)
+
 
 
 # Links:
